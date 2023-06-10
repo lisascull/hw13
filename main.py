@@ -1,30 +1,25 @@
-def file_permissions(n, files, m, queries):
+operation = {
+    'read': 'R',
+    'write': 'W',
+    'execute': 'X',
+}
+n = int(input())
 
-    files = {}
-    for i in range(n):
-        file, permissions = files[i].split()
-        files[file] = permissions
+files = {}
 
-    results = []
-    for i in range(m):
-        operation, file_name = queries[i].split()
+for i in range(n):
+    file_data = input().split()
+    filename = file_data[0]
+    operations = set(file_data[1:])
+    files[filename] = operations
 
-        if file_name not in files:
-            results.append('Access denied')
-            continue
+m = int(input())
 
-        if operation in files[file_name]:
-            results.append('OK')
-        else:
-            results.append('Access denied')
+for i in range(m):
+    operation, filename = input().split()
 
-    return results
-
-#for _ in range(n):
-    #file_name, operations = input('Введіть назву файлу та допустимі операції: ')
-    #files[file_name] = set(operations)
-
-#m = int(input('Введіть кількість запитів: '))
-
-#for _ in range(m):
-   # operation, file_name = input('Введіть операцію та назву файлу: ')
+    if operation in files[filename]:
+        output += 'OK\n'
+    else:
+        output += 'Access denied\n'
+print(output)
